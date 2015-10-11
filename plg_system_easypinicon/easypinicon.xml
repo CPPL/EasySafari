@@ -11,7 +11,7 @@
     <description>PLG_SYSTEM_EASYPINICON_XML_DESCRIPTION</description>
     <files>
         <filename plugin="easypinicon">easypinicon.php</filename>
-        <folder>fields</folder>
+        <filename>easypiniconhelper.php</filename>
         <folder>language</folder>
     </files>
     <config>

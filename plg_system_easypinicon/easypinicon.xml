@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_EASYPINICON</name>
+    <author>Craig Phillips</author>
+    <creationDate>##CREATEDATE##</creationDate>
+    <copyright>Copyright © 2015 Craig Phillips Pty Ltd. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>support@seepeoplesoftware.com</authorEmail>
+    <authorUrl>seepeoplesoftware.com</authorUrl>
+    <version>##VER## (##COMHASH##)</version>
+    <description>PLG_SYSTEM_EASYPINICON_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="easypinicon">easypinicon.php</filename>
+        <folder>fields</folder>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic"
+                      label="PLG_SYSTEM_EASYPINICON_SETTINGS_NOTE_LABEL"
+                      description="PLG_SYSTEM_EASYPINICON_SETTINGS_NOTE_DESC" >
+                <field name="hr" type="spacer" hr="true"/>
+                <field name="pin_icon_file"
+                       type="filelist"
+                       default=""
+                       label="PLG_SYSTEM_EASYPINICON_SETTINGS_PIN_LOGO_FILE_LABEL"
+                       description="PLG_SYSTEM_EASYPINICON_SETTINGS_PIN_LOGO_FILE_DESC"
+                       directory="images" filter="\.svg" exclude="" stripext="" />
+                <field name="pin_icon_color"
+                       type="color"
+                       default="#000"
+                       label="PLG_SYSTEM_EASYPINICON_SETTINGS_PIN_LOGO_CUSTOM_COLOUR_LABEL"
+                       description="PLG_SYSTEM_EASYPINICON_SETTINGS_PIN_LOGO_CUSTOM_COLOUR_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

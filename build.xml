@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EasyMIGS" default="package" basedir="./">
+    <property name="name"         value="easypinicon"/>
+    <property name="type"         value="plg"/>
+    <property name="subtype"      value="_system"/>
+    <property name="extension"    value="${type}${subtype}_${name}"/>
+    <property name="repo"         value="${extension}"/>
+    <property name="devBuildsDir" value="./_Dev_Builds"/>
+
+    <!-- get our start time -->
+    <exec command='date +"%H:%M:%S"'
+          returnProperty="startReturn"
+          outputProperty="startTime"/>
+
+    <!-- get our package date -->
+    <exec command='date +"%d-%b-%Y"'
+          returnProperty="dateReturn"
+          outputProperty="packageDate"/>
+
+    <!-- get the current year -->
+    <exec command='date +"%Y"'
+          returnProperty="yearReturn"
+          outputProperty="currentYear"/>
+
+    <!-- get our current tag -->
+    <exec command="git describe --tags `git log master -n 0 --pretty=format:%H`"
+          dir="${repo}"
+          returnProperty="gitReturn"
+          outputProperty="gitTag"/>
+
+    <!-- get the last commits hash -->
+    <exec command="git rev-parse --short HEAD"
+          dir="${repo}"
+          returnProperty="gitReturn"
+          outputProperty="gitHash"/>
+
+    <property name="thisbuild" value="${gitTag}-${extension}" override="true"/>
+    <property name="buildDir" value="./${devBuildsDir}/${thisbuild}"/>
+
+    <!-- ============================================  -->
+    <!--                  FILESETS                     -->
+    <!-- ============================================  -->
+    <!-- The copy needs to ignore certain unneeded files from git and the OS etc. -->
+    <fileset dir="${repo}" id="extension_repo">
+        <include name="**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name=".gitignore"/>
+        <exclude name=".DS_Store"/>
+        <exclude name="**/.idea/**"/>
+    </fileset>
+
+    <!-- ============================================  -->
+    <!--                   FILTERS                     -->
+    <!-- ============================================  -->
+    <!-- The standard tokens to be replaced -->
+    <filterchain id="std_tokens">
+        <replacetokens begintoken="##" endtoken="##">
+            <token key="VER" value="${gitTag}"/>
+            <token key="COMHASH" value="${gitHash}"/>
+            <token key="CREATEDATE" value="${packageDate}"/>
+            <token key="CURYEAR" value="${currentYear}"/>
+        </replacetokens>
+    </filterchain>
+
+    <!-- ============================================  -->
+    <!-- Target: CreateArchives                        -->
+    <!-- ============================================  -->
+    <target name="CreateArchives">
+        <echo msg="Creating archive..."/>
+        <echo msg="File Name: ${thisbuild}"/>
+
+        <echo msg=".zip archive last..."/>
+        <property name="dzfile" value="${devBuildsDir}/${thisbuild}.zip"/>
+        <zip destfile="${dzfile}">
+            <fileset dir="${buildDir}">
+                <include name="**"/>
+            </fileset>
+        </zip>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: prepare                               -->
+    <!-- ============================================  -->
+    <target name="prepare">
+        <echo msg="Making build directory ${buildDir}"/>
+        <mkdir dir="${buildDir}"/>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: package                               -->
+    <!-- Desc:   Builds the plugin zip.                -->
+    <!-- ============================================  -->
+    <target name="package" depends="prepare">
+        <!-- ==================================  -->
+        <!-- Build the vmpayment plugin package  -->
+        <!-- ==================================  -->
+        <echo msg="Copying GIT Repo to ${buildDir} from ${repo}..."/>
+        <copy todir="${buildDir}">
+            <fileset refid="extension_repo"/>
+            <filterchain refid="std_tokens"/>
+        </copy>
+        <phingcall target="CreateArchives">
+        </phingcall>
+
+        <!-- Remove the leftover buildDir -->
+        <delete dir="${buildDir}"/>
+
+    </target>
+</project>

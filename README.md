@@ -1,6 +1,6 @@
-#EasyPin Icon Plugin
+#EasySafari Plugin
 
-EasyPin Icon Plugin is a standard Joomla plugin that lets you add an icon to be displayed by the pinned tab feature of Safari 9.
+EasySafari Plugin is a standard Joomla plugin that lets you add an icon to be displayed by the pinned tab feature of Safari 9.
 
 ##Basic Usage Steps
 

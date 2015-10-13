@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
  *
  */
 
-class plgSystemEasyPinIcon extends JPlugin
+class plgSystemEasySafari extends JPlugin
 {
     protected $weAreDoingIt;
 
@@ -83,13 +83,13 @@ link;
      */
     private function areWeDoingThis() {
         // Check the installation
-        $path_to_helper = JPATH_PLUGINS . '/system/easypinicon/easypiniconhelper.php';
+        $path_to_helper = JPATH_PLUGINS . '/system/easysafari/easysafarihelper.php';
 
         if (file_exists($path_to_helper)) {
             // Yes! Now lets get the helper
             require_once $path_to_helper;
 
-            if (class_exists('EasyPinIconHelper')) {
+            if (class_exists('EasySafariHelper')) {
                 // Looks like the real helper, so we're good to go...
                 return true;
             }

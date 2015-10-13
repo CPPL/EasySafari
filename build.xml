@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="EasyMIGS" default="package" basedir="./">
-    <property name="name"         value="easypinicon"/>
+<project name="EasySafari" default="package" basedir="./">
+    <property name="name"         value="easysafari"/>
     <property name="type"         value="plg"/>
     <property name="subtype"      value="_system"/>
     <property name="extension"    value="${type}${subtype}_${name}"/>

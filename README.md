@@ -5,7 +5,7 @@ The EasySafari plugin works by adding a link to a black and transparent SVG file
 Each page of your Joomla website will have the link tag added to the head so that no matter which page you/your users "pin" in Safari the icon will be your custom one.
 
 To see this plugin working, simply open this website in Safari version 9.0 (or later) and drag the tab to the left side of the window. As you approach the left side of the Tab Bar you will see an animation similar to this one shown below:
-![Pinned Tabs](Support files/1.0.0/Pinned_Tabs2.gif)
+![Pinned Tabs](Support%20files/1.0.0/Pinned_Tabs2.gif)
 
 
 ## Basic Usage Steps
